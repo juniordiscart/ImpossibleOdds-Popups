@@ -1,0 +1,20 @@
+{
+    "name": "ImpossibleOdds.Popups.Canvas",
+    "rootNamespace": "",
+    "references": [
+        "ImpossibleOdds.Core",
+        "ImpossibleOdds.Popups.Core",
+        "ImpossibleOdds.Popups.Canvas.Abstract",
+        "ImpossibleOdds.Popups.Canvas.Legacy",
+        "ImpossibleOdds.Popups.Canvas.TextMeshPro"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

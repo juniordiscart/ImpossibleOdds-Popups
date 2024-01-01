@@ -1,0 +1,17 @@
+{
+    "name": "ImpossibleOdds.Popups.Canvas.Abstract",
+    "rootNamespace": "",
+    "references": [
+        "ImpossibleOdds.Core",
+        "ImpossibleOdds.Popups.Core"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
