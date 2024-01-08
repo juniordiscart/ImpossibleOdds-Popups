@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ImpossibleOdds.Popups.Canvas.TextMeshPro
 {
-    public class TMPPopupWindow : CanvasDefaultPopupWindow
+    public class TMPPopupWindow : DefaultPopupWindow
     {
         [SerializeField]
         private TMP_Text header;

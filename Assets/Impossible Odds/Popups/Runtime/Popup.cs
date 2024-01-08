@@ -7,24 +7,29 @@ namespace ImpossibleOdds.Popups
     {
         private static Popup root;
 
-        public static IPopupWindow ShowNotification(NotificationPopup popupData)
+        public static PopupHandle ShowNotification(NotificationPopupDescription popupData)
         {
             return root.displaySystem.ShowNotification(popupData);
         }
 
-        public static IPopupWindow ShowConfirmation(ConfirmationPopup popupData)
+        public static PopupHandle ShowConfirmation(ConfirmationPopupDescription popupData)
         {
             return root.displaySystem.ShowConfirmation(popupData);
         }
 
-        public static IPopupWindow ShowComplex(ComplexPopup popupData)
+        public static PopupHandle ShowComplex(ComplexPopupDescription popupData)
         {
             return root.displaySystem.ShowComplexPopup(popupData);
         }
 
-        public static IPopupWindow ShowCustom(IPopupWindow popupWindow)
+        public static PopupHandle ShowCustom(IPopupWindow popupWindow)
         {
             return root.displaySystem.ShowCustomPopup(popupWindow);
+        }
+
+        public static void ClosePopup(PopupHandle popupHandle)
+        {
+            root.displaySystem.ClosePopup(popupHandle);
         }
 
         private IPopupDisplaySystem displaySystem;

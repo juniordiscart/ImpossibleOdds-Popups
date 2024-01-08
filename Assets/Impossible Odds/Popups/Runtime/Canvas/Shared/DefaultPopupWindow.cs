@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace ImpossibleOdds.Popups.Canvas
 {
-    public abstract class CanvasDefaultPopupWindow : CanvasPopupWindow
+    public abstract class DefaultPopupWindow : PopupWindow
     {
         /// <summary>
         /// The text contents of the popup window.

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace ImpossibleOdds.Popups.Canvas.Legacy
 {
-    public class LegacyPopupWindow : CanvasDefaultPopupWindow
+    public class LegacyPopupWindow : DefaultPopupWindow
     {
         [SerializeField]
         private Text header;

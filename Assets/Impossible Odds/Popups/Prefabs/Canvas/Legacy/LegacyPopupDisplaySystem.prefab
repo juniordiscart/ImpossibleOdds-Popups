@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputBlocker: {fileID: 4067037392583535084}
-  root: {fileID: 4067037391968791960}
+  popupParent: {fileID: 4067037391968791960}
   popupWindowPrefab: {fileID: 213406733045481096, guid: bb286997c84d746e89a9749c2f07bedd, type: 3}
 --- !u!1 &4067037392583535085
 GameObject:

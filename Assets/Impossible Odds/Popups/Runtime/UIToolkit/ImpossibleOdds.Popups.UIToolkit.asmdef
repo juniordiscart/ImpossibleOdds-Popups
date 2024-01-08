@@ -1,8 +1,9 @@
 {
-    "name": "ImpossibleOdds.Popups.Core",
+    "name": "ImpossibleOdds.Popups.UIToolkit",
     "rootNamespace": "",
     "references": [
-        "ImpossibleOdds.Core"
+        "ImpossibleOdds.Core",
+        "ImpossibleOdds.Popups.Core"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

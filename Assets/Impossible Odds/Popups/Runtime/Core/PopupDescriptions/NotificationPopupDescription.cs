@@ -6,7 +6,7 @@ namespace ImpossibleOdds.Popups
     /// Configuration data for a simple notification popup.
     /// A notification popup only shows textual information which can be clicked away.
     /// </summary>
-    public struct NotificationPopup : IPopupDescription
+    public struct NotificationPopupDescription : IPopupDescription
     {
         /// <summary>
         /// The notification's header text.

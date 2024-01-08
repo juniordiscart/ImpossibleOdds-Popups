@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="PopupContainer" style="background-color: rgb(255, 255, 255); max-width: 400px; padding-right: 20px; padding-left: 20px; padding-top: 20px; padding-bottom: 20px;">
+        <ui:Label text="Header" display-tooltip-when-elided="true" name="Header" style="-unity-font-style: bold; font-size: 30px; margin-bottom: 20px; white-space: normal;" />
+        <ui:Label text="Contents" display-tooltip-when-elided="true" name="Contents" style="white-space: normal; font-size: 24px; margin-bottom: 20px;" />
+        <ui:GroupBox name="ButtonRoot" style="flex-direction: row; justify-content: center;" />
+    </ui:VisualElement>
+</ui:UXML>

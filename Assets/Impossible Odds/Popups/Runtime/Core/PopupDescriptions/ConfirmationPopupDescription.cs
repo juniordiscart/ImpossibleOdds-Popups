@@ -6,7 +6,7 @@ namespace ImpossibleOdds.Popups
     /// Configuration data for a simple confirmation popup.
     /// A confirmation popup only shows textual information that displays a choice the player can make.
     /// </summary>
-    public struct ConfirmationPopup : IPopupDescription
+    public struct ConfirmationPopupDescription : IPopupDescription
     {
         /// <summary>
         /// The confirmation's header text.

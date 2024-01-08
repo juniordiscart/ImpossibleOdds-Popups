@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace ImpossibleOdds.Popups
 {
-    public struct ComplexPopup : IPopupDescription
+    public struct ComplexPopupDescription : IPopupDescription
     {
         public string header;
         public string contents;
