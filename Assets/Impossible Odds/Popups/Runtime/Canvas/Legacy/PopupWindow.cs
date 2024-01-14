@@ -4,7 +4,8 @@ using UnityEngine.UI;
 
 namespace ImpossibleOdds.Popups.Canvas.Legacy
 {
-    public class LegacyPopupWindow : DefaultPopupWindow
+    [AddComponentMenu("Impossible Odds/Popups/Canvas/Legacy/Default Popup Window")]
+    public class PopupWindow : DefaultPopupWindow
     {
         [SerializeField]
         private Text header;
@@ -15,7 +16,7 @@ namespace ImpossibleOdds.Popups.Canvas.Legacy
         private RectTransform buttonRoot;
 
         [SerializeField]
-        private LegacyPopupButton buttonPrefab;
+        private PopupButton buttonPrefab;
         
         /// <inheritdoc />
         public override string Header
@@ -37,12 +38,12 @@ namespace ImpossibleOdds.Popups.Canvas.Legacy
         public override bool DestroyPopupWindowOnHide => true;
 
         /// <inheritdoc />
-        public override void SetButtons(IEnumerable<PopupButton> buttons)
+        public override void SetButtons(IEnumerable<PopupButtonDescription> buttons)
         {
-            foreach (PopupButton popupButton in buttons)
+            foreach (PopupButtonDescription popupButton in buttons)
             {
-                LegacyPopupButton button = Instantiate(buttonPrefab, buttonRoot);
-                button.ButtonInfo = popupButton;
+                PopupButton button = Instantiate(buttonPrefab, buttonRoot);
+                button.ButtonDescriptionInfo = popupButton;
                 button.onButtonClicked += CallOnHidePopup;
             }
         }

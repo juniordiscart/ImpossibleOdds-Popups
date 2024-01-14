@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace ImpossibleOdds.Popups.Canvas.TextMeshPro
 {
-    public class TMPPopupWindow : DefaultPopupWindow
+    [AddComponentMenu("Impossible Odds/Popups/Canvas/Text Mesh Pro/Default Popup Window")]
+    public class PopupWindow : DefaultPopupWindow
     {
         [SerializeField]
         private TMP_Text header;
@@ -15,7 +16,7 @@ namespace ImpossibleOdds.Popups.Canvas.TextMeshPro
         private RectTransform buttonRoot;
 
         [SerializeField]
-        private TMPPopupButton buttonPrefab;
+        private PopupButton buttonPrefab;
 
         /// <inheritdoc />
         public override string Header
@@ -37,12 +38,12 @@ namespace ImpossibleOdds.Popups.Canvas.TextMeshPro
         public override bool DestroyPopupWindowOnHide => true;
 
         /// <inheritdoc />
-        public override void SetButtons(IEnumerable<PopupButton> buttons)
+        public override void SetButtons(IEnumerable<PopupButtonDescription> buttons)
         {
-            foreach (PopupButton popupButton in buttons)
+            foreach (PopupButtonDescription popupButton in buttons)
             {
-                TMPPopupButton button = Instantiate(buttonPrefab, buttonRoot);
-                button.ButtonInfo = popupButton;
+                PopupButton button = Instantiate(buttonPrefab, buttonRoot);
+                button.ButtonDescriptionInfo = popupButton;
                 button.onButtonClicked += CallOnHidePopup;
             }
         }

@@ -21,12 +21,12 @@ namespace ImpossibleOdds.Popups
         /// <summary>
         /// The confirmation's confirm button.
         /// </summary>
-        public PopupButton confirmButton;
+        public PopupButtonDescription confirmButtonDescription;
 
         /// <summary>
         /// The confirmation's cancel button.
         /// </summary>
-        public PopupButton cancelButton;
+        public PopupButtonDescription cancelButtonDescription;
 
         /// <inheritdoc />
         string IPopupDescription.Header => header;
@@ -35,6 +35,6 @@ namespace ImpossibleOdds.Popups
         string IPopupDescription.Contents => contents;
 
         /// <inheritdoc />
-        IEnumerable<PopupButton> IPopupDescription.Buttons => new[] { confirmButton, cancelButton };
+        IEnumerable<PopupButtonDescription> IPopupDescription.Buttons => new[] { confirmButtonDescription, cancelButtonDescription };
     }
 }

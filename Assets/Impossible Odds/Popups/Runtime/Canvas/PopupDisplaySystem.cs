@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Component = UnityEngine.Component;
 
 namespace ImpossibleOdds.Popups.Canvas
 {
     /// <summary>
     /// A popup display system based on the Unity UI Canvas system.
     /// </summary>
+    [AddComponentMenu("Impossible Odds/Popups/Canvas/Popup Display System")]
     public class PopupDisplaySystem : MonoBehaviour, IPopupDisplaySystem
     {
         [SerializeField]

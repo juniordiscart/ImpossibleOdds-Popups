@@ -17,7 +17,7 @@ namespace ImpossibleOdds.Popups.Canvas
         /// The popup buttons.
         /// </summary>
         /// <param name="buttons">The buttons to be displayed on the popup.</param>
-        public abstract void SetButtons(IEnumerable<PopupButton> buttons);
+        public abstract void SetButtons(IEnumerable<PopupButtonDescription> buttons);
     }
 }
 

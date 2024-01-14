@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6727188018312849556}
   - component: {fileID: 6727188018312849557}
-  - component: {fileID: 6727188018312849555}
   - component: {fileID: 6727188018312849554}
+  - component: {fileID: 6727188018312849555}
   m_Layer: 5
   m_Name: UIToolkitPopupDisplaySystem
   m_TagString: Untagged
@@ -50,26 +50,6 @@ MonoBehaviour:
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 7280d117072ab432da8a4c190c3751ad, type: 3}
   m_SortingOrder: 100
---- !u!114 &6727188018312849555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6727188018312849558}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89d71721f0cf644188485a0000e35e97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputBlockerName: InputBlocker
-  popupParentName: PopupRoot
-  defaultPopupWindowConfiguration:
-    headerName: Header
-    contentsName: Contents
-    buttonsRootName: ButtonRoot
-    popupWindowTreeAsset: {fileID: 9197481963319205126, guid: c2847ddbf4f724544b42252c603c01c3, type: 3}
-    buttonTreeAsset: {fileID: 9197481963319205126, guid: 6da6c1b4858a841a8a1fd5ac86370024, type: 3}
 --- !u!114 &6727188018312849554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,3 +62,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b19b691de7eb46358c12898db3e3d62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6727188018312849555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6727188018312849558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89d71721f0cf644188485a0000e35e97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupParentName: PopupRoot
+  defaultPopupWindowConfiguration:
+    headerName: Header
+    contentsName: Contents
+    buttonsRootName: ButtonRoot
+    popupWindowTreeAsset: {fileID: 9197481963319205126, guid: c2847ddbf4f724544b42252c603c01c3, type: 3}
+    buttonTreeAsset: {fileID: 9197481963319205126, guid: 6da6c1b4858a841a8a1fd5ac86370024, type: 3}

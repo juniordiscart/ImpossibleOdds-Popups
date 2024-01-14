@@ -11,11 +11,11 @@ public class TestPopups : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.N))
         {
-            Popup.ShowNotification(new NotificationPopup()
+            Popup.ShowNotification(new NotificationPopupDescription()
             {
                 header = "Notification",
                 contents = "This is a notification popup to notify the player of something. It's purpose is to inform and be clicked away.",
-                hideButton = new PopupButton()
+                hideButtonDescription = new PopupButtonDescription()
                 {
                     text = "Ok",
                     onClickAction = () => Log.Info("Player has been notified.")
@@ -24,16 +24,16 @@ public class TestPopups : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.C))
         {
-            Popup.ShowConfirmation(new ConfirmationPopup()
+            Popup.ShowConfirmation(new ConfirmationPopupDescription()
             {
                 header = "Confirmation",
                 contents = "This is a confirmation popup to present the player with the choice of confirming an action, or cancel it.",
-                confirmButton = new PopupButton()
+                confirmButtonDescription = new PopupButtonDescription()
                 {
                     text = "Confirm",
                     onClickAction = () => Log.Info("Player confirms the choice.")
                 },
-                cancelButton = new PopupButton()
+                cancelButtonDescription = new PopupButtonDescription()
                 {
                     text = "Cancel",
                     onClickAction = () => Log.Info("The player requests to cancel the action.")
@@ -42,23 +42,23 @@ public class TestPopups : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.X))
         {
-            Popup.ShowComplex(new ComplexPopup()
+            Popup.ShowComplex(new ComplexPopupDescription()
             {
                 header = "Complex Options",
                 contents = "This is a complex popup that presents the player with multiple options from which he can choose.",
                 popupButtons = new[]
                 {
-                    new PopupButton()
+                    new PopupButtonDescription()
                     {
                         text = "Save",
                         onClickAction = () => Log.Info("Just save.")
                     },
-                    new PopupButton()
+                    new PopupButtonDescription()
                     {
                         text = "Save & close",
                         onClickAction = () => Log.Info("Save and close the game.")
                     },
-                    new PopupButton()
+                    new PopupButtonDescription()
                     {
                         text = "Cancel",
                         onClickAction = () => Log.Info("Cancel.")

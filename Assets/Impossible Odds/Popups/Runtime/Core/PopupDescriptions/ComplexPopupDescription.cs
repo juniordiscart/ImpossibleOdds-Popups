@@ -6,7 +6,7 @@ namespace ImpossibleOdds.Popups
     {
         public string header;
         public string contents;
-        public PopupButton[] popupButtons;
+        public PopupButtonDescription[] popupButtons;
 
         /// <inheritdoc />
         string IPopupDescription.Header => header;
@@ -15,7 +15,7 @@ namespace ImpossibleOdds.Popups
         string IPopupDescription.Contents => contents;
 
         /// <inheritdoc />
-        IEnumerable<PopupButton> IPopupDescription.Buttons => popupButtons;
+        IEnumerable<PopupButtonDescription> IPopupDescription.Buttons => popupButtons;
     }
 }
 

@@ -23,7 +23,7 @@ namespace ImpossibleOdds.Popups
         /// <summary>
         /// The buttons on the popup.
         /// </summary>
-        IEnumerable<PopupButton> Buttons
+        IEnumerable<PopupButtonDescription> Buttons
         {
             get;
         }

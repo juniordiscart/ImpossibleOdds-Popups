@@ -1,35 +1,36 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ImpossibleOdds.Popups.Canvas.Legacy
+namespace ImpossibleOdds.Popups.Canvas.TextMeshPro
 {
-    [RequireComponent(typeof(Button))]
-    public class LegacyPopupButton : MonoBehaviour
+    [RequireComponent(typeof(Button)), AddComponentMenu("Impossible Odds/Popups/Canvas/Text Mesh Pro/Popup Button")]
+    public class PopupButton : MonoBehaviour
     {
         public event Action onButtonClicked;
         
         [SerializeField]
-        private Text text;
+        private TMP_Text text;
         [SerializeField]
         private Image icon;
 
-        private PopupButton buttonInfo;
+        private PopupButtonDescription m_ButtonDescriptionInfo;
 
         private Button Button => GetComponent<Button>();
 
-        public PopupButton ButtonInfo
+        public PopupButtonDescription ButtonDescriptionInfo
         {
-            get => buttonInfo;
+            get => m_ButtonDescriptionInfo;
             set
             {
-                buttonInfo = value;
+                m_ButtonDescriptionInfo = value;
 
                 if (text != null)
                 {
-                    if (!buttonInfo.text.IsNullOrEmpty())
+                    if (!m_ButtonDescriptionInfo.text.IsNullOrEmpty())
                     {
-                        text.text = buttonInfo.text;
+                        text.text = m_ButtonDescriptionInfo.text;
                     }
                     else
                     {
@@ -39,9 +40,9 @@ namespace ImpossibleOdds.Popups.Canvas.Legacy
 
                 if (icon != null)
                 {
-                    if (buttonInfo.icon != null)
+                    if (m_ButtonDescriptionInfo.icon != null)
                     {
-                        icon.sprite = buttonInfo.icon;
+                        icon.sprite = m_ButtonDescriptionInfo.icon;
                     }
                     else
                     {
@@ -58,9 +59,8 @@ namespace ImpossibleOdds.Popups.Canvas.Legacy
 
         private void OnButtonClick()
         {
-            buttonInfo.onClickAction.InvokeIfNotNull();
+            m_ButtonDescriptionInfo.onClickAction.InvokeIfNotNull();
             onButtonClicked.InvokeIfNotNull();
         }
     }
 }
-

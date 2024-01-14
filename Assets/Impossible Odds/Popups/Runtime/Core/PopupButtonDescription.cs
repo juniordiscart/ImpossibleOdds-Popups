@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ImpossibleOdds.Popups
 {
     [Serializable]
-    public struct PopupButton
+    public struct PopupButtonDescription
     {
         /// <summary>
         /// The icon on the button.

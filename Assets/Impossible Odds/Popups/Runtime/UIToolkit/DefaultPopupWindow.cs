@@ -25,13 +25,13 @@ namespace ImpossibleOdds.Popups.UIToolkit
             set => PopupObject.Q<Label>(configuration.contentsName).text = value;
         }
 
-        public void SetButtons(IEnumerable<PopupButton> buttons)
+        public void SetButtons(IEnumerable<PopupButtonDescription> buttons)
         {
             buttons.ThrowIfNull(nameof(buttons));
 
             VisualElement buttonRoot = PopupObject.Q(configuration.buttonsRootName);
             
-            foreach (PopupButton popupButton in buttons)
+            foreach (PopupButtonDescription popupButton in buttons)
             {
                 TemplateContainer buttonContainer = configuration.buttonTreeAsset.Instantiate();
                 Button button = buttonContainer.Q<Button>();

@@ -21,7 +21,7 @@ namespace ImpossibleOdds.Popups
         /// <summary>
         /// The notification's button information.
         /// </summary>
-        public PopupButton hideButton;
+        public PopupButtonDescription hideButtonDescription;
 
         /// <inheritdoc />
         string IPopupDescription.Header => header;
@@ -30,7 +30,7 @@ namespace ImpossibleOdds.Popups
         string IPopupDescription.Contents => contents;
 
         /// <inheritdoc />
-        IEnumerable<PopupButton> IPopupDescription.Buttons => new[] { hideButton };
+        IEnumerable<PopupButtonDescription> IPopupDescription.Buttons => new[] { hideButtonDescription };
     }
 }
 

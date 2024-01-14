@@ -5,20 +5,16 @@ using UnityEngine.UIElements;
 
 namespace ImpossibleOdds.Popups.UIToolkit
 {
-    [RequireComponent(typeof(UIDocument))]
+    [RequireComponent(typeof(UIDocument)), AddComponentMenu("Impossible Odds/Popups/UI Toolkit/Popup Display System")]
     public class PopupDisplaySystem : MonoBehaviour, IPopupDisplaySystem
     {
-        [SerializeField]
-        private string inputBlockerName = "InputBlocker";
         [SerializeField]
         private string popupParentName = "PopupRoot";
         [SerializeField]
         private DefaultPopupWindowConfiguration defaultPopupWindowConfiguration;
 
         private UIDocument document;
-        private VisualElement inputBlocker;
-        private VisualElement popupParent;
-        
+
         private readonly List<PopupHandle> activePopups = new List<PopupHandle>();
 
         /// <inheritdoc />
@@ -26,7 +22,7 @@ namespace ImpossibleOdds.Popups.UIToolkit
         {
             return activePopups.Count > 0;
         }
-        
+
         /// <inheritdoc />
         public bool IsShowingPopup(PopupHandle popupHandle)
         {
@@ -61,15 +57,16 @@ namespace ImpossibleOdds.Popups.UIToolkit
             {
                 throw new ArgumentException($"This {nameof(PopupDisplaySystem)} can only display custom popups that implement the {nameof(IUIToolkitPopupWindow)} interface.");
             }
-            
+
             // Check that this popup window is not already being used in another popup handle handled by this display system.
             if (activePopups.TryFind(ph => ph.PopupWindow == popupWindow, out PopupHandle existingHandle))
             {
                 return existingHandle;
             }
-            
-            popupParent.Add(uiToolkitPopupWindow.PopupObject);
-            
+
+            document.rootVisualElement.Q(popupParentName).Add(uiToolkitPopupWindow.PopupObject);
+            document.rootVisualElement.SetEnabled(true);
+
             PopupHandle handle = new PopupHandle(popupWindow, this);
             popupWindow.onHidePopup += ClosePopupAndCleanup;
             activePopups.Add(handle);
@@ -94,56 +91,45 @@ namespace ImpossibleOdds.Popups.UIToolkit
 
             if (popupHandle.PopupWindow is IUIToolkitPopupWindow uiToolkitPopupWindow)
             {
-                popupParent.Remove(uiToolkitPopupWindow.PopupObject);
+                document.rootVisualElement.Q(popupParentName).Remove(uiToolkitPopupWindow.PopupObject);
             }
-            
-            bool isAnyPopupActive = IsShowingPopup(); 
-            inputBlocker.visible = isAnyPopupActive;
-            inputBlocker.SetEnabled(isAnyPopupActive);
 
-            popupParent.visible = isAnyPopupActive;
-            popupParent.SetEnabled(isAnyPopupActive);
+            document.rootVisualElement.style.display = IsShowingPopup() ? DisplayStyle.Flex : DisplayStyle.None;
+            document.rootVisualElement.SetEnabled(IsShowingPopup());
         }
 
         private PopupHandle ShowDefaultPopup(IPopupDescription description)
         {
             TemplateContainer container = defaultPopupWindowConfiguration.popupWindowTreeAsset.Instantiate();
+            VisualElement popupParent = document.rootVisualElement.Q(popupParentName);
             DefaultPopupWindow popupWindow = new DefaultPopupWindow(container, defaultPopupWindowConfiguration)
             {
                 Header = description.Header,
                 Contents = description.Contents
             };
-            
+
             popupWindow.SetButtons(description.Buttons);
             popupParent.Add(container);
-            
+
             PopupHandle handle = new PopupHandle(popupWindow, this);
             popupWindow.onHidePopup += () => ClosePopup(handle);
             activePopups.Add(handle);
-            
-            inputBlocker.visible = true;
-            inputBlocker.SetEnabled(true);
 
-            popupParent.visible = true;
-            popupParent.SetEnabled(true);
-            
+            document.rootVisualElement.style.display = DisplayStyle.Flex;
+            document.rootVisualElement.SetEnabled(true);
+
             popupParent.Q<Button>().Focus();
 
             return handle;
         }
-        
+
         private void Awake()
         {
             document = GetComponent<UIDocument>();
-            inputBlocker = document.rootVisualElement.Q(inputBlockerName);
-            popupParent = document.rootVisualElement.Q(popupParentName);
 
-            inputBlocker.visible = false;
-            inputBlocker.SetEnabled(false);
-
-            popupParent.visible = false;
-            popupParent.SetEnabled(false);
+            // Hide and disable the input blocker and popup parent.
+            document.rootVisualElement.style.display = DisplayStyle.None;
+            document.rootVisualElement.SetEnabled(false);
         }
     }
 }
-
