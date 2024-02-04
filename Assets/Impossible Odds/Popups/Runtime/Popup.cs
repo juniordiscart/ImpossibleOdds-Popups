@@ -2,32 +2,76 @@ using UnityEngine;
 
 namespace ImpossibleOdds.Popups
 {
-    [RequireComponent(typeof(IPopupDisplaySystem)), AddComponentMenu("Impossible Odds/Popups/Popup System")]
+    [RequireComponent(typeof(IPopupDisplaySystem)),
+     AddComponentMenu("Impossible Odds/Popups/Popup System")]
     public class Popup : MonoBehaviour
     {
         private static Popup root;
 
-        public static PopupHandle ShowNotification(NotificationPopupDescription popupData)
+        /// <summary>
+        /// Checks whether any popup is currently being displayed by this popup system.
+        /// </summary>
+        /// <returns>True if a popup is currently being displayed. False otherwise.</returns>
+        public static bool IsShowingPopups()
+        {
+            return root.displaySystem.IsShowingPopups();
+        }
+
+        /// <summary>
+        /// Checks whether the provided popup handle is being displayed by this popup system.
+        /// </summary>
+        /// <param name="popupHandle">The popup handle to check with the popup system.</param>
+        /// <returns>True if it is being displayed. False otherwise.</returns>
+        public static bool IsShowingPopup(IPopupHandle popupHandle)
+        {
+            return root.displaySystem.IsShowingPopup(popupHandle);
+        }
+
+        /// <summary>
+        /// Shows a notification popup.
+        /// </summary>
+        /// <param name="popupData">The data to build the notification popup.</param>
+        /// <returns>A handle to the popup window.</returns>
+        public static IPopupHandle ShowNotification(NotificationPopupDescription popupData)
         {
             return root.displaySystem.ShowNotification(popupData);
         }
 
-        public static PopupHandle ShowConfirmation(ConfirmationPopupDescription popupData)
+        /// <summary>
+        /// Shows a confirmation popup.
+        /// </summary>
+        /// <param name="popupData">The data to build the confirmation popup.</param>
+        /// <returns>A handle to the popup window.</returns>
+        public static IPopupHandle ShowConfirmation(ConfirmationPopupDescription popupData)
         {
             return root.displaySystem.ShowConfirmation(popupData);
         }
 
-        public static PopupHandle ShowComplex(ComplexPopupDescription popupData)
+        /// <summary>
+        /// Shows a complex popup with multiple options.
+        /// </summary>
+        /// <param name="popupData">The data to build the complex popup.</param>
+        /// <returns>A handle to the popup window.</returns>
+        public static IPopupHandle ShowComplex(ComplexPopupDescription popupData)
         {
             return root.displaySystem.ShowComplexPopup(popupData);
         }
 
-        public static PopupHandle ShowCustom(IPopupWindow popupWindow)
+        /// <summary>
+        /// Shows a custom popup window in the display system.
+        /// </summary>
+        /// <param name="popupData">The popup data to show in this popup display system.</param>
+        /// <returns>A handle to the popup window.</returns>
+        public static IPopupHandle ShowCustom(ICustomPopupDescription popupData)
         {
-            return root.displaySystem.ShowCustomPopup(popupWindow);
+            return root.displaySystem.ShowCustomPopup(popupData);
         }
 
-        public static void ClosePopup(PopupHandle popupHandle)
+        /// <summary>
+        /// Close the popup window if it was active by this display system.
+        /// </summary>
+        /// <param name="popupHandle">The popup window to close.</param>
+        public static void ClosePopup(IPopupHandle popupHandle)
         {
             root.displaySystem.ClosePopup(popupHandle);
         }
@@ -56,4 +100,3 @@ namespace ImpossibleOdds.Popups
         }
     }
 }
-

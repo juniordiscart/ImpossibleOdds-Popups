@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="PopupContainer" style="min-width: 400px; max-width: 450px;">
+        <ui:Label text="Let&apos;s get to know you a little better. Would you like to share your name with us?" display-tooltip-when-elided="true" name="Contents" class="popup-contents" />
+        <ui:TextField picking-mode="Ignore" value="filler text" text="Your name" style="min-height: 35px; font-size: 16px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+        <ui:GroupBox name="ButtonRoot" class="popup-buttonroot">
+            <ui:Button text="Confirm" display-tooltip-when-elided="true" name="ConfirmButton" class="popup-button" />
+            <ui:Button text="Cancel" display-tooltip-when-elided="true" name="CancelButton" class="popup-button" />
+        </ui:GroupBox>
+    </ui:VisualElement>
+</ui:UXML>

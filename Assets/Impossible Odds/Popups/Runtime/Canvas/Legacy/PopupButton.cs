@@ -14,11 +14,14 @@ namespace ImpossibleOdds.Popups.Canvas.Legacy
         [SerializeField]
         private Image icon;
 
-        private Popups.PopupButtonDescription m_ButtonDescriptionInfo;
+        private PopupButtonDescription m_ButtonDescriptionInfo;
 
         private Button Button => GetComponent<Button>();
 
-        public Popups.PopupButtonDescription ButtonDescriptionInfo
+        /// <summary>
+        /// The description associated with this button.
+        /// </summary>
+        public PopupButtonDescription ButtonDescriptionInfo
         {
             get => m_ButtonDescriptionInfo;
             set

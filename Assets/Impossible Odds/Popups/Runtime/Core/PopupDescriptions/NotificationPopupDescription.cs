@@ -6,7 +6,7 @@ namespace ImpossibleOdds.Popups
     /// Configuration data for a simple notification popup.
     /// A notification popup only shows textual information which can be clicked away.
     /// </summary>
-    public struct NotificationPopupDescription : IPopupDescription
+    public struct NotificationPopupDescription : IDefaultPopupDescription
     {
         /// <summary>
         /// The notification's header text.
@@ -24,13 +24,13 @@ namespace ImpossibleOdds.Popups
         public PopupButtonDescription hideButtonDescription;
 
         /// <inheritdoc />
-        string IPopupDescription.Header => header;
+        string IDefaultPopupDescription.Header => header;
 
         /// <inheritdoc />
-        string IPopupDescription.Contents => contents;
+        string IDefaultPopupDescription.Contents => contents;
 
         /// <inheritdoc />
-        IEnumerable<PopupButtonDescription> IPopupDescription.Buttons => new[] { hideButtonDescription };
+        IEnumerable<PopupButtonDescription> IDefaultPopupDescription.Buttons => new[] { hideButtonDescription };
     }
 }
 

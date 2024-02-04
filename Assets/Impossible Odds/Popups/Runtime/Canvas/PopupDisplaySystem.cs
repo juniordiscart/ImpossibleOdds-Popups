@@ -16,94 +16,92 @@ namespace ImpossibleOdds.Popups.Canvas
         private RectTransform popupParent;
 
         [SerializeField]
-        private DefaultPopupWindow popupWindowPrefab;
+        private PopupWindow popupWindowPrefab;
+        [SerializeField]
+        private PopupDefaultContents popupDefaultContentsPrefab;
 
-        private readonly List<PopupHandle> activePopups = new List<PopupHandle>();
+        private readonly List<PopupWindow> activePopups = new List<PopupWindow>();
 
         /// <inheritdoc />
-        public bool IsShowingPopup()
+        public bool IsShowingPopups()
         {
             return activePopups.Count > 0;
         }
         
         /// <inheritdoc />
-        public bool IsShowingPopup(PopupHandle popupHandle)
+        public bool IsShowingPopup(IPopupHandle popupHandle)
         {
             popupHandle.ThrowIfNull(nameof(popupHandle));
-            return activePopups.Contains(popupHandle);
+            return (popupHandle is PopupWindow pw) && activePopups.Contains(pw);
         }
 
         /// <inheritdoc />
-        public PopupHandle ShowNotification(NotificationPopupDescription notificationData)
+        public IPopupHandle ShowNotification(NotificationPopupDescription notificationData)
         {
             return ShowDefaultPopup(notificationData);
         }
 
         /// <inheritdoc />
-        public PopupHandle ShowConfirmation(ConfirmationPopupDescription confirmationData)
+        public IPopupHandle ShowConfirmation(ConfirmationPopupDescription confirmationData)
         {
             return ShowDefaultPopup(confirmationData);
         }
 
         /// <inheritdoc />
-        public PopupHandle ShowComplexPopup(ComplexPopupDescription complexData)
+        public IPopupHandle ShowComplexPopup(ComplexPopupDescription complexData)
         {
             return ShowDefaultPopup(complexData);
         }
 
         /// <inheritdoc />
-        public PopupHandle ShowCustomPopup(IPopupWindow popupWindow)
+        public IPopupHandle ShowCustomPopup(Popups.ICustomPopupDescription popupDescription)
         {
-            popupWindow.ThrowIfNull(nameof(popupWindow));
+            popupDescription.ThrowIfNull(nameof(popupDescription));
 
-            if (popupWindow is not ICanvasPopupWindow canvasPopup)
+            if (popupDescription is not ICustomPopupDescription customPopupData)
             {
-                throw new ArgumentException($"This {nameof(PopupDisplaySystem)} can only display popups that implement the {nameof(ICanvasPopupWindow)} interface.");
+                throw new ArgumentException($"This {nameof(PopupDisplaySystem)} can only display popups that implement the {nameof(ICustomPopupDescription)} interface.");
             }
+
+            ICustomPopupContents popupContents = customPopupData.GetPopupContents();
+
+            PopupWindow popupWindow = Instantiate(popupWindowPrefab, popupParent);
+            popupWindow.Initialize(popupContents, this);
+            popupWindow.SetHeader(popupContents.Header);
+            popupWindow.SetContents(popupContents.ContentsRoot);
+            popupWindow.onClosePopup += ClosePopup;
             
-            // Check that this popup window is not already being used in another popup handle handled by this display system.
-            if (activePopups.TryFind(ph => ph.PopupWindow == popupWindow, out PopupHandle existingHandle))
-            {
-                return existingHandle;
-            }
-
-            canvasPopup.PopupObject.transform.SetParent(popupParent);
+            activePopups.Add(popupWindow);
             
-            PopupHandle handle = new PopupHandle(popupWindow, this);
-            popupWindow.onHidePopup += ClosePopupAndCleanup;
-            activePopups.Add(handle);
-            return handle;
-
-            void ClosePopupAndCleanup()
-            {
-                popupWindow.onHidePopup -= ClosePopupAndCleanup;
-                ClosePopup(handle);
-            }
+            inputBlocker.gameObject.SetActive(true);
+            popupParent.gameObject.SetActive(true);
+            
+            return popupWindow;
         }
 
         /// <inheritdoc />
-        public void ClosePopup(PopupHandle popupHandle)
+        public void ClosePopup(IPopupHandle popupHandle)
         {
             popupHandle.ThrowIfNull(nameof(popupHandle));
-            
-            if (!activePopups.Remove(popupHandle))
+
+            // If the popup handle is not of the expected type, or
+            // the popup is not being handled by this popup display system.
+            if ((popupHandle is not PopupWindow popupWindow) || !activePopups.Remove(popupWindow))
             {
                 return;
             }
 
-            if (popupHandle.PopupWindow is ICanvasPopupWindow canvasPopupWindow)
-            {
-                canvasPopupWindow.PopupObject.transform.SetParent(null);
+            // Remove the popup from the canvas.
+            popupWindow.transform.SetParent(null);
 
-                if (canvasPopupWindow.DestroyPopupWindowOnHide)
-                {
-                    canvasPopupWindow.PopupObject.SetActive(false);
-                    Destroy(canvasPopupWindow.PopupObject);
-                }
+            if (popupWindow.PopupContents is IPopupContents { DestroyAfterClose: true })
+            {
+                popupWindow.gameObject.SetActive(false);
+                Destroy(popupWindow.gameObject);
             }
             
-            inputBlocker.gameObject.SetActive(IsShowingPopup());
-            popupParent.gameObject.SetActive(IsShowingPopup());
+            inputBlocker.gameObject.SetActive(IsShowingPopups());
+            popupParent.gameObject.SetActive(IsShowingPopups());
         }
 
         private void Awake()
@@ -112,21 +110,24 @@ namespace ImpossibleOdds.Popups.Canvas
             popupParent.gameObject.SetActive(activePopups.Count > 0);
         }
 
-        private PopupHandle ShowDefaultPopup(IPopupDescription description)
+        private PopupWindow ShowDefaultPopup(IDefaultPopupDescription description)
         {
-            DefaultPopupWindow popupWindow = Instantiate(popupWindowPrefab, popupParent);
-            popupWindow.Header = description.Header;
-            popupWindow.Contents = description.Contents;
-            popupWindow.SetButtons(description.Buttons);
-
-            PopupHandle handle = new PopupHandle(popupWindow, this);
-            popupWindow.onHidePopup += () => ClosePopup(handle);
-            activePopups.Add(handle);
+            PopupDefaultContents defaultContents = Instantiate(popupDefaultContentsPrefab);
+            defaultContents.SetContents(description.Contents);
+            defaultContents.SetButtons(description.Buttons);
+            
+            PopupWindow popupWindow = Instantiate(popupWindowPrefab, popupParent);
+            popupWindow.Initialize(defaultContents, this);
+            popupWindow.SetHeader(description.Header);
+            popupWindow.SetContents(defaultContents.transform as RectTransform);
+            popupWindow.onClosePopup += ClosePopup;
+            
+            activePopups.Add(popupWindow);
             
             inputBlocker.gameObject.SetActive(true);
             popupParent.gameObject.SetActive(true);
 
-            return handle;
+            return popupWindow;
         }
     }
 }

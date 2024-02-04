@@ -1,0 +1,23 @@
+{
+    "name": "ImpossibleOdds.Popups.Samples",
+    "rootNamespace": "",
+    "references": [
+        "ImpossibleOdds.Core",
+        "ImpossibleOdds.Popups",
+        "ImpossibleOdds.Popups.Core",
+        "ImpossibleOdds.Popups.Canvas",
+        "ImpossibleOdds.Popups.UIToolkit",
+        "ImpossibleOdds.Popups.Canvas.Abstract"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

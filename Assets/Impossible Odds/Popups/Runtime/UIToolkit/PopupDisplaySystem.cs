@@ -11,125 +11,167 @@ namespace ImpossibleOdds.Popups.UIToolkit
         [SerializeField]
         private string popupParentName = "PopupRoot";
         [SerializeField]
-        private DefaultPopupWindowConfiguration defaultPopupWindowConfiguration;
+        private PopupWindowConfiguration popupWindowConfiguration;
+        [SerializeField]
+        private DefaultPopupContentsConfiguration defaultPopupContentsConfiguration;
 
         private UIDocument document;
 
-        private readonly List<PopupHandle> activePopups = new List<PopupHandle>();
+        private readonly List<PopupWindow> activePopups = new List<PopupWindow>();
+
+        private VisualElement PopupParent => document.rootVisualElement.Q(popupParentName);
 
         /// <inheritdoc />
-        public bool IsShowingPopup()
+        public bool IsShowingPopups()
         {
             return activePopups.Count > 0;
         }
 
         /// <inheritdoc />
-        public bool IsShowingPopup(PopupHandle popupHandle)
+        public bool IsShowingPopup(IPopupHandle popupHandle)
         {
             popupHandle.ThrowIfNull(nameof(popupHandle));
-            return activePopups.Contains(popupHandle);
+            return (popupHandle is PopupWindow pw) && activePopups.Contains(pw);
         }
 
         /// <inheritdoc />
-        public PopupHandle ShowNotification(NotificationPopupDescription notificationData)
+        public IPopupHandle ShowNotification(NotificationPopupDescription notificationData)
         {
             return ShowDefaultPopup(notificationData);
         }
 
         /// <inheritdoc />
-        public PopupHandle ShowConfirmation(ConfirmationPopupDescription confirmationData)
+        public IPopupHandle ShowConfirmation(ConfirmationPopupDescription confirmationData)
         {
             return ShowDefaultPopup(confirmationData);
         }
 
         /// <inheritdoc />
-        public PopupHandle ShowComplexPopup(ComplexPopupDescription complexData)
+        public IPopupHandle ShowComplexPopup(ComplexPopupDescription complexData)
         {
             return ShowDefaultPopup(complexData);
         }
 
         /// <inheritdoc />
-        public PopupHandle ShowCustomPopup(IPopupWindow popupWindow)
+        public IPopupHandle ShowCustomPopup(Popups.ICustomPopupDescription popupDescription)
         {
-            popupWindow.ThrowIfNull(nameof(popupWindow));
+            popupDescription.ThrowIfNull(nameof(popupDescription));
 
-            if (popupWindow is not IUIToolkitPopupWindow uiToolkitPopupWindow)
+            if (popupDescription is not ICustomPopupDescription uitkPopupDescription)
             {
-                throw new ArgumentException($"This {nameof(PopupDisplaySystem)} can only display custom popups that implement the {nameof(IUIToolkitPopupWindow)} interface.");
+                throw new ArgumentException($"This {nameof(PopupDisplaySystem)} can only display custom popups that implement the {nameof(ICustomPopupDescription)} interface.");
             }
-
-            // Check that this popup window is not already being used in another popup handle handled by this display system.
-            if (activePopups.TryFind(ph => ph.PopupWindow == popupWindow, out PopupHandle existingHandle))
+            
+            ICustomPopupContents popupContents = uitkPopupDescription.GetPopupContents();
+            
+            PopupWindow window = CreatePopupWindow(popupContents);
+            window.SetHeader(popupContents.Header);
+            
+            VisualElement popupContentsRoot = popupContents.ContentsRoot;
+            if (popupContentsRoot is TemplateContainer templateContainer)
             {
-                return existingHandle;
+                window.SetContents(templateContainer);
             }
-
-            document.rootVisualElement.Q(popupParentName).Add(uiToolkitPopupWindow.PopupObject);
-            document.rootVisualElement.SetEnabled(true);
-
-            PopupHandle handle = new PopupHandle(popupWindow, this);
-            popupWindow.onHidePopup += ClosePopupAndCleanup;
-            activePopups.Add(handle);
-            return handle;
-
-            void ClosePopupAndCleanup()
+            else
             {
-                popupWindow.onHidePopup -= ClosePopupAndCleanup;
-                ClosePopup(handle);
+                window.SetContents(popupContentsRoot);
             }
+            
+            window.onClosePopup += ClosePopup;
+            
+            activePopups.Add(window);
+            return window;
         }
 
         /// <inheritdoc />
-        public void ClosePopup(PopupHandle popupHandle)
+        public void ClosePopup(IPopupHandle popupHandle)
         {
             popupHandle.ThrowIfNull(nameof(popupHandle));
-
-            if (!activePopups.Remove(popupHandle))
+            
+            // If the popup handle is not of the expected type, or
+            // the popup is not being handled by this popup display system.
+            if ((popupHandle is not PopupWindow popupWindow) || !activePopups.Remove(popupWindow))
             {
                 return;
             }
 
-            if (popupHandle.PopupWindow is IUIToolkitPopupWindow uiToolkitPopupWindow)
+            if (PopupParent.Contains(popupWindow.WindowElement))
             {
-                document.rootVisualElement.Q(popupParentName).Remove(uiToolkitPopupWindow.PopupObject);
+                PopupParent.Remove(popupWindow.WindowElement);
             }
 
-            document.rootVisualElement.style.display = IsShowingPopup() ? DisplayStyle.Flex : DisplayStyle.None;
-            document.rootVisualElement.SetEnabled(IsShowingPopup());
+            document.enabled = IsShowingPopups();
         }
 
-        private PopupHandle ShowDefaultPopup(IPopupDescription description)
+        private PopupWindow ShowDefaultPopup(IDefaultPopupDescription description)
         {
-            TemplateContainer container = defaultPopupWindowConfiguration.popupWindowTreeAsset.Instantiate();
-            VisualElement popupParent = document.rootVisualElement.Q(popupParentName);
-            DefaultPopupWindow popupWindow = new DefaultPopupWindow(container, defaultPopupWindowConfiguration)
-            {
-                Header = description.Header,
-                Contents = description.Contents
-            };
+            TemplateContainer defaultTreeContents = defaultPopupContentsConfiguration.contentsTreeAsset.Instantiate();
+            DefaultPopupContents defaultPopupContents = new DefaultPopupContents(
+                defaultTreeContents.Q<TextElement>(defaultPopupContentsConfiguration.contentsName),
+                defaultTreeContents.Q(defaultPopupContentsConfiguration.buttonsRootName),
+                defaultPopupContentsConfiguration.buttonTreeAsset);
+            
+            defaultPopupContents.SetContents(description.Contents);
+            defaultPopupContents.SetButtons(description.Buttons);
+            
+            PopupWindow window = CreatePopupWindow(defaultPopupContents);
+            window.SetHeader(description.Header);
+            window.SetContents(defaultTreeContents);
+            window.onClosePopup += ClosePopup;
+            
+            activePopups.Add(window);
 
-            popupWindow.SetButtons(description.Buttons);
-            popupParent.Add(container);
-
-            PopupHandle handle = new PopupHandle(popupWindow, this);
-            popupWindow.onHidePopup += () => ClosePopup(handle);
-            activePopups.Add(handle);
-
-            document.rootVisualElement.style.display = DisplayStyle.Flex;
-            document.rootVisualElement.SetEnabled(true);
-
-            popupParent.Q<Button>().Focus();
-
-            return handle;
+            return window;
         }
 
         private void Awake()
         {
             document = GetComponent<UIDocument>();
+        }
 
-            // Hide and disable the input blocker and popup parent.
-            document.rootVisualElement.style.display = DisplayStyle.None;
-            document.rootVisualElement.SetEnabled(false);
+        private PopupWindow CreatePopupWindow(IPopupContents popupContents)
+        {
+            document.enabled = true;
+            popupWindowConfiguration.windowTreeAsset.CloneTree(PopupParent, out int firstElementIndex, out int elementAddedCount);
+
+            if (elementAddedCount != 1)
+            {
+                throw new ArgumentOutOfRangeException(nameof(elementAddedCount), "The popup display system expects only a single root element when creating a popup window.");
+            }
+
+            VisualElement popupWindowElement = PopupParent[firstElementIndex];
+
+            return new PopupWindow(
+                this,
+                popupContents,
+                popupWindowElement,
+                popupWindowElement.Q<TextElement>(popupWindowConfiguration.headerName),
+                popupWindowElement.Q(popupWindowConfiguration.contentSiblingName));
+        }
+        
+        [Serializable]
+        private class DefaultPopupContentsConfiguration
+        {
+            [SerializeField]
+            public string contentsName;
+            [SerializeField]
+            public string buttonsRootName;
+
+            [SerializeField]
+            public VisualTreeAsset contentsTreeAsset;
+            [SerializeField]
+            public VisualTreeAsset buttonTreeAsset;
+        }
+        
+        [Serializable]
+        private class PopupWindowConfiguration
+        {
+            [SerializeField]
+            public string headerName;
+            [SerializeField]
+            public string contentSiblingName;
+            [SerializeField]
+            public VisualTreeAsset windowTreeAsset;
         }
     }
 }

@@ -1,51 +1,21 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace ImpossibleOdds.Popups.Canvas.Legacy
 {
-    [AddComponentMenu("Impossible Odds/Popups/Canvas/Legacy/Default Popup Window")]
-    public class PopupWindow : DefaultPopupWindow
+    /// <summary>
+    /// A Popup window frame using Unity's legacy UI component system.
+    /// </summary>
+    [AddComponentMenu("Impossible Odds/Popups/Canvas/Legacy/Popup Window")]
+    public class PopupWindow : ImpossibleOdds.Popups.Canvas.PopupWindow
     {
         [SerializeField]
         private Text header;
-        [SerializeField]
-        private Text contents;
-
-        [SerializeField]
-        private RectTransform buttonRoot;
-
-        [SerializeField]
-        private PopupButton buttonPrefab;
-        
-        /// <inheritdoc />
-        public override string Header
-        {
-            get => header.text;
-            set => header.text = value;
-        }
-
-        /// <summary>
-        /// The text contents of the popup window.
-        /// </summary>
-        public override string Contents
-        {
-            get => contents.text;
-            set => contents.text = value;
-        }
 
         /// <inheritdoc />
-        public override bool DestroyPopupWindowOnHide => true;
-
-        /// <inheritdoc />
-        public override void SetButtons(IEnumerable<PopupButtonDescription> buttons)
+        public override void SetHeader(string header)
         {
-            foreach (PopupButtonDescription popupButton in buttons)
-            {
-                PopupButton button = Instantiate(buttonPrefab, buttonRoot);
-                button.ButtonDescriptionInfo = popupButton;
-                button.onButtonClicked += CallOnHidePopup;
-            }
+            this.header.text = header;
         }
     }
 }
