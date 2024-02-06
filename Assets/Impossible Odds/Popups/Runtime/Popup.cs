@@ -2,8 +2,7 @@ using UnityEngine;
 
 namespace ImpossibleOdds.Popups
 {
-    [RequireComponent(typeof(IPopupDisplaySystem)),
-     AddComponentMenu("Impossible Odds/Popups/Popup System")]
+    [RequireComponent(typeof(IPopupDisplaySystem)), AddComponentMenu("Impossible Odds/Popups/Popup System")]
     public class Popup : MonoBehaviour
     {
         private static Popup root;

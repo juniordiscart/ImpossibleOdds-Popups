@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 namespace ImpossibleOdds.Popups.Canvas.Legacy
 {
+    /// <summary>
+    /// A popup button script for display with legacy Canvas components. 
+    /// </summary>
     [RequireComponent(typeof(Button)), AddComponentMenu("Impossible Odds/Popups/Canvas/Legacy/Popup Button")]
     public class PopupButton : MonoBehaviour
     {

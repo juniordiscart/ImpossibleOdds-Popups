@@ -18,7 +18,7 @@ public class TestPopupsUITK : TestPopups, ImpossibleOdds.Popups.UIToolkit.ICusto
 
     ImpossibleOdds.Popups.UIToolkit.ICustomPopupContents ImpossibleOdds.Popups.UIToolkit.ICustomPopupDescription.GetPopupContents()
     {
-        TestCustomUITKPopup customUITKPopup = new TestCustomUITKPopup(this.customUITKPopup);
+        CustomUITKPopup customUITKPopup = new CustomUITKPopup(this.customUITKPopup);
         customUITKPopup.onConfirmName += SayHello;
         return customUITKPopup;
     }

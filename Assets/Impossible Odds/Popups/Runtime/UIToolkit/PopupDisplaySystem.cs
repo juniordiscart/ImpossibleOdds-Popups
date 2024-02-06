@@ -5,15 +5,18 @@ using UnityEngine.UIElements;
 
 namespace ImpossibleOdds.Popups.UIToolkit
 {
+    /// <summary>
+    /// The UI Toolkit-based popup display system.
+    /// </summary>
     [RequireComponent(typeof(UIDocument)), AddComponentMenu("Impossible Odds/Popups/UI Toolkit/Popup Display System")]
     public class PopupDisplaySystem : MonoBehaviour, IPopupDisplaySystem
     {
-        [SerializeField]
+        [SerializeField, Tooltip("The name of the element where popup windows will attached to.")]
         private string popupParentName = "PopupRoot";
-        [SerializeField]
+        [SerializeField, Tooltip("Configuration values to create and configure popup windows spawned by the display system.")]
         private PopupWindowConfiguration popupWindowConfiguration;
-        [SerializeField]
-        private DefaultPopupContentsConfiguration defaultPopupContentsConfiguration;
+        [SerializeField, Tooltip("Configuration values to spawn and create simple popups.")]
+        private DefaultPopupContentsConfiguration simplePopupContentsConfiguration;
 
         private UIDocument document;
 
@@ -103,18 +106,18 @@ namespace ImpossibleOdds.Popups.UIToolkit
             document.enabled = IsShowingPopups();
         }
 
-        private PopupWindow ShowDefaultPopup(IDefaultPopupDescription description)
+        private PopupWindow ShowDefaultPopup(ISimplePopupDescription description)
         {
-            TemplateContainer defaultTreeContents = defaultPopupContentsConfiguration.contentsTreeAsset.Instantiate();
-            DefaultPopupContents defaultPopupContents = new DefaultPopupContents(
-                defaultTreeContents.Q<TextElement>(defaultPopupContentsConfiguration.contentsName),
-                defaultTreeContents.Q(defaultPopupContentsConfiguration.buttonsRootName),
-                defaultPopupContentsConfiguration.buttonTreeAsset);
+            TemplateContainer defaultTreeContents = simplePopupContentsConfiguration.contentsTreeAsset.Instantiate();
+            SimplePopupContents simplePopupContents = new SimplePopupContents(
+                defaultTreeContents.Q<TextElement>(simplePopupContentsConfiguration.contentsName),
+                defaultTreeContents.Q(simplePopupContentsConfiguration.buttonsRootName),
+                simplePopupContentsConfiguration.buttonTreeAsset);
             
-            defaultPopupContents.SetContents(description.Contents);
-            defaultPopupContents.SetButtons(description.Buttons);
+            simplePopupContents.SetContents(description.Contents);
+            simplePopupContents.SetButtons(description.Buttons);
             
-            PopupWindow window = CreatePopupWindow(defaultPopupContents);
+            PopupWindow window = CreatePopupWindow(simplePopupContents);
             window.SetHeader(description.Header);
             window.SetContents(defaultTreeContents);
             window.onClosePopup += ClosePopup;

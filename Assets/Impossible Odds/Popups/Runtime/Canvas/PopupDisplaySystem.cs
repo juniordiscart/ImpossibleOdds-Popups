@@ -7,18 +7,17 @@ namespace ImpossibleOdds.Popups.Canvas
     /// <summary>
     /// A popup display system based on the Unity UI Canvas system.
     /// </summary>
-    [AddComponentMenu("Impossible Odds/Popups/Canvas/Popup Display System")]
+    [RequireComponent(typeof(UnityEngine.Canvas)), AddComponentMenu("Impossible Odds/Popups/Canvas/Popup Display System")]
     public class PopupDisplaySystem : MonoBehaviour, IPopupDisplaySystem
     {
-        [SerializeField]
-        private RectTransform inputBlocker;
-        [SerializeField]
+        [SerializeField, Tooltip("The parent object for popup windows spawned by this display system.")]
         private RectTransform popupParent;
-
-        [SerializeField]
+        [SerializeField, Tooltip("The popup window prefab.")]
         private PopupWindow popupWindowPrefab;
-        [SerializeField]
-        private PopupDefaultContents popupDefaultContentsPrefab;
+        [SerializeField, Tooltip("The prefab for simple popup contents.")]
+        private SimplePopupContents simplePopupContentsPrefab;
+
+        private UnityEngine.Canvas canvas;
 
         private readonly List<PopupWindow> activePopups = new List<PopupWindow>();
 
@@ -72,9 +71,8 @@ namespace ImpossibleOdds.Popups.Canvas
             popupWindow.onClosePopup += ClosePopup;
             
             activePopups.Add(popupWindow);
-            
-            inputBlocker.gameObject.SetActive(true);
-            popupParent.gameObject.SetActive(true);
+
+            canvas.enabled = true;
             
             return popupWindow;
         }
@@ -99,33 +97,31 @@ namespace ImpossibleOdds.Popups.Canvas
                 popupWindow.gameObject.SetActive(false);
                 Destroy(popupWindow.gameObject);
             }
-            
-            inputBlocker.gameObject.SetActive(IsShowingPopups());
-            popupParent.gameObject.SetActive(IsShowingPopups());
+
+            canvas.enabled = IsShowingPopups();
         }
 
         private void Awake()
         {
-            inputBlocker.gameObject.SetActive(activePopups.Count > 0);
-            popupParent.gameObject.SetActive(activePopups.Count > 0);
+            canvas = GetComponent<UnityEngine.Canvas>();
+            canvas.enabled = false;
         }
 
-        private PopupWindow ShowDefaultPopup(IDefaultPopupDescription description)
+        private PopupWindow ShowDefaultPopup(ISimplePopupDescription description)
         {
-            PopupDefaultContents defaultContents = Instantiate(popupDefaultContentsPrefab);
-            defaultContents.SetContents(description.Contents);
-            defaultContents.SetButtons(description.Buttons);
+            SimplePopupContents contents = Instantiate(simplePopupContentsPrefab);
+            contents.SetContents(description.Contents);
+            contents.SetButtons(description.Buttons);
             
             PopupWindow popupWindow = Instantiate(popupWindowPrefab, popupParent);
-            popupWindow.Initialize(defaultContents, this);
+            popupWindow.Initialize(contents, this);
             popupWindow.SetHeader(description.Header);
-            popupWindow.SetContents(defaultContents.transform as RectTransform);
+            popupWindow.SetContents(contents.transform as RectTransform);
             popupWindow.onClosePopup += ClosePopup;
             
             activePopups.Add(popupWindow);
-            
-            inputBlocker.gameObject.SetActive(true);
-            popupParent.gameObject.SetActive(true);
+
+            canvas.enabled = true;
 
             return popupWindow;
         }

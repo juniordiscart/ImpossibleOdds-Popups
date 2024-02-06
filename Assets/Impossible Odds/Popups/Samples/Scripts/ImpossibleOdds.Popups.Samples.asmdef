@@ -9,9 +9,7 @@
         "ImpossibleOdds.Popups.UIToolkit",
         "ImpossibleOdds.Popups.Canvas.Abstract"
     ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

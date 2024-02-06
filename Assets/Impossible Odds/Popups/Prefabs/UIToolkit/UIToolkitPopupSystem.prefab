@@ -76,10 +76,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupParentName: PopupRoot
   popupWindowConfiguration:
-    headerName: Header
-    contentSiblingName: Header
+    headerName: HeaderText
+    contentSiblingName: HeaderGroup
     windowTreeAsset: {fileID: 9197481963319205126, guid: c2847ddbf4f724544b42252c603c01c3, type: 3}
-  defaultPopupContentsConfiguration:
+  simplePopupContentsConfiguration:
     contentsName: Contents
     buttonsRootName: ButtonRoot
     contentsTreeAsset: {fileID: 9197481963319205126, guid: 0ac029df786004cd683d1c3c101ba294, type: 3}

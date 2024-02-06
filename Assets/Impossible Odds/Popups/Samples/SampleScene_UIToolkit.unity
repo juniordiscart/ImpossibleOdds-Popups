@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 404074490}
   - component: {fileID: 404074489}
-  - component: {fileID: 404074488}
+  - component: {fileID: 404074491}
   m_Layer: 0
   m_Name: UITKTest
   m_TagString: Untagged
@@ -141,19 +141,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &404074488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 404074487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe5ac846afd964e74a92156744d791c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  customUITKPopup: {fileID: 9197481963319205126, guid: b0a75c1493e094b1e831b9e756d3b906, type: 3}
 --- !u!114 &404074489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,6 +172,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &404074491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404074487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe5ac846afd964e74a92156744d791c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customUITKPopup: {fileID: 9197481963319205126, guid: b0a75c1493e094b1e831b9e756d3b906, type: 3}
 --- !u!1 &544921494
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,6 +480,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6727188018312849556, guid: f89c1b8a74ae94d4f85f98090f11ac46, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6727188018312849557, guid: f89c1b8a74ae94d4f85f98090f11ac46, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6727188018312849558, guid: f89c1b8a74ae94d4f85f98090f11ac46, type: 3}

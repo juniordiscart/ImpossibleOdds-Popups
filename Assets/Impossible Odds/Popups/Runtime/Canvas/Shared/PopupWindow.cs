@@ -42,11 +42,11 @@ namespace ImpossibleOdds.Popups.Canvas
         /// <summary>
         /// Sets the header text of the popup window.
         /// </summary>
-        /// <param name="header">The header text of the popup window</param>
+        /// <param name="header">The header text to be displayed on the popup window.</param>
         public abstract void SetHeader(string header);
 
         /// <summary>
-        /// Attaches the actual contents of the popup to the popup window.
+        /// Attaches the actual contents of the popup to the root of the popup window's contents root.
         /// </summary>
         /// <param name="contents">The contents of the popup window.</param>
         public virtual void SetContents(RectTransform contents)
@@ -55,6 +55,12 @@ namespace ImpossibleOdds.Popups.Canvas
             
             contents.SetParent(contentsSibling.parent, false);
             contents.SetSiblingIndex(contentsSibling.GetSiblingIndex() + 1);
+        }
+
+        /// <inheritdoc />
+        public virtual void ClosePopup()
+        {
+            OnClosePopup();
         }
 
         private void OnClosePopup()

@@ -1,5 +1,8 @@
 namespace ImpossibleOdds.Popups.Canvas
 {
+    /// <summary>
+    /// The base interface for popup contents to be displayed on the Canvas display system.
+    /// </summary>
     public interface IPopupContents : ImpossibleOdds.Popups.IPopupContents
     {
         /// <summary>

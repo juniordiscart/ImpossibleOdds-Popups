@@ -1,5 +1,8 @@
 namespace ImpossibleOdds.Popups
 {
+    /// <summary>
+    /// The base interface for custom popup contents.
+    /// </summary>
     public interface ICustomPopupContents : IPopupContents
     {
         /// <summary>

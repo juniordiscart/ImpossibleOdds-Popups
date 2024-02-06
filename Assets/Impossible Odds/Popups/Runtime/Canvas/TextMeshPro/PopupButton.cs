@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 namespace ImpossibleOdds.Popups.Canvas.TextMeshPro
 {
+    /// <summary>
+    /// A popup button script for display with Text Mesh Pro components.
+    /// </summary>
     [RequireComponent(typeof(Button)), AddComponentMenu("Impossible Odds/Popups/Canvas/Text Mesh Pro/Popup Button")]
     public class PopupButton : MonoBehaviour
     {

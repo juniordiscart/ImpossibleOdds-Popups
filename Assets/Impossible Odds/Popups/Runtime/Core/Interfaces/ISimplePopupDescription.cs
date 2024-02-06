@@ -2,7 +2,10 @@ using System.Collections.Generic;
 
 namespace ImpossibleOdds.Popups
 {
-    public interface IDefaultPopupDescription
+    /// <summary>
+    /// Interface for describing a simple textual popup with limited user options. 
+    /// </summary>
+    public interface ISimplePopupDescription
     {
         /// <summary>
         /// The header text of the popup.

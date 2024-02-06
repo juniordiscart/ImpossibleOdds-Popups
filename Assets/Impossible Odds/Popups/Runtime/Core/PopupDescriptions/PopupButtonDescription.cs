@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace ImpossibleOdds.Popups
 {
+    /// <summary>
+    /// A popup button description to display the button's text, icon and the action to take when clicked.
+    /// </summary>
     [Serializable]
     public struct PopupButtonDescription
     {

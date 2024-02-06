@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ImpossibleOdds.Popups.Canvas
 {
-    public abstract class PopupDefaultContents : MonoBehaviour, IPopupContents
+    public abstract class SimplePopupContents : MonoBehaviour, IPopupContents
     {
         /// <inheritdoc />
         public event Action onClosePopup;

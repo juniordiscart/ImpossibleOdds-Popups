@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <ui:VisualElement name="PopupContainer" style="min-width: 400px; max-width: 450px;">
         <ui:Label text="Let&apos;s get to know you a little better. Would you like to share your name with us?" display-tooltip-when-elided="true" name="Contents" class="popup-contents" />
-        <ui:TextField picking-mode="Ignore" value="filler text" text="Your name" style="min-height: 35px; font-size: 16px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+        <ui:TextField picking-mode="Ignore" value="filler text" text="Your name" style="min-height: 35px; font-size: 16px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; border-left-color: rgb(0, 201, 255); border-right-color: rgb(0, 201, 255); border-top-color: rgb(0, 201, 255); border-bottom-color: rgb(0, 201, 255); border-left-width: 3px; border-right-width: 3px; border-top-width: 3px; border-bottom-width: 3px; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; background-color: rgb(43, 50, 51);" />
         <ui:GroupBox name="ButtonRoot" class="popup-buttonroot">
             <ui:Button text="Confirm" display-tooltip-when-elided="true" name="ConfirmButton" class="popup-button" />
             <ui:Button text="Cancel" display-tooltip-when-elided="true" name="CancelButton" class="popup-button" />

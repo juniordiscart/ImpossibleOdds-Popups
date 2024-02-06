@@ -7,8 +7,8 @@ namespace ImpossibleOdds.Popups.Canvas.Legacy
     /// <summary>
     /// Default popup contents for displaying a simple text message with buttons.
     /// </summary>
-    [AddComponentMenu("Impossible Odds/Popups/Canvas/Legacy/Popup Default Contents")]
-    public class PopupDefaultContents : ImpossibleOdds.Popups.Canvas.PopupDefaultContents
+    [AddComponentMenu("Impossible Odds/Popups/Canvas/Legacy/Simple Popup Contents")]
+    public class SimplePopupContents : ImpossibleOdds.Popups.Canvas.SimplePopupContents
     {
         [SerializeField]
         private Text contents;

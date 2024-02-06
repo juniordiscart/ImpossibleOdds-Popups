@@ -3,8 +3,14 @@ using System.Collections;
 
 namespace ImpossibleOdds.Popups
 {
+    /// <summary>
+    /// A handle interface for dealing with a specific popup being shown or displayed by a popup display system.
+    /// </summary>
     public interface IPopupHandle : IEnumerator
     {
+        /// <summary>
+        /// Invoked when the popup should be closed.
+        /// </summary>
         event Action<IPopupHandle> onClosePopup;
         
         /// <summary>
@@ -27,6 +33,11 @@ namespace ImpossibleOdds.Popups
         /// Is the popup still being shown by the popup display system?
         /// </summary>
         bool IsShowing => DisplaySystem.IsShowingPopup(this);
+
+        /// <summary>
+        /// Attempts to close the popup window with the display system.
+        /// </summary>
+        void ClosePopup();
     }
 }
 

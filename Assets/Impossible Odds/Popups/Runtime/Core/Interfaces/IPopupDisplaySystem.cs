@@ -22,28 +22,28 @@ namespace ImpossibleOdds.Popups
         /// <summary>
         /// Shows a notification popup.
         /// </summary>
-        /// <param name="notificationData">The data to build the notification popup.</param>
+        /// <param name="notificationData">The data for the notification popup's contents.</param>
         /// <returns>A handle to the popup window.</returns>
         IPopupHandle ShowNotification(NotificationPopupDescription notificationData);
 
         /// <summary>
         /// Shows a confirmation popup.
         /// </summary>
-        /// <param name="confirmationData">The data to build the confirmation popup.</param>
+        /// <param name="confirmationData">The data for the confirmation popup's contents.</param>
         /// <returns>A handle to the popup window.</returns>
         IPopupHandle ShowConfirmation(ConfirmationPopupDescription confirmationData);
 
         /// <summary>
         /// Shows a complex popup with multiple options.
         /// </summary>
-        /// <param name="complexData">The data to build the complex popup.</param>
+        /// <param name="complexData">The data for the complex popup's contents.</param>
         /// <returns>A handle to the popup window.</returns>
         IPopupHandle ShowComplexPopup(ComplexPopupDescription complexData);
 
         /// <summary>
         /// Shows a custom popup window in the display system.
         /// </summary>
-        /// <param name="customData">The popup data to show in this popup display system.</param>
+        /// <param name="customData">The popup data to show in this display system.</param>
         /// <returns>A handle to the custom popup window.</returns>
         IPopupHandle ShowCustomPopup(ICustomPopupDescription customData);
 

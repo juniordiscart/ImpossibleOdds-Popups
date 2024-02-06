@@ -3,10 +3,10 @@ using System.Collections.Generic;
 namespace ImpossibleOdds.Popups
 {
     /// <summary>
-    /// Configuration data for a default popup with multiple options.
-    /// A complex popup only shows textual information which offers multiple options for the player to pick from.
+    /// Configuration data for a simple popup with multiple options.
+    /// A complex popup only shows textual information which offers multiple options for the user to pick from.
     /// </summary>
-    public struct ComplexPopupDescription : IDefaultPopupDescription
+    public struct ComplexPopupDescription : ISimplePopupDescription
     {
         /// <summary>
         /// The popup's header text to be displayed.
@@ -24,13 +24,13 @@ namespace ImpossibleOdds.Popups
         public PopupButtonDescription[] popupButtons;
 
         /// <inheritdoc />
-        string IDefaultPopupDescription.Header => header;
+        string ISimplePopupDescription.Header => header;
 
         /// <inheritdoc />
-        string IDefaultPopupDescription.Contents => contents;
+        string ISimplePopupDescription.Contents => contents;
 
         /// <inheritdoc />
-        IEnumerable<PopupButtonDescription> IDefaultPopupDescription.Buttons => popupButtons;
+        IEnumerable<PopupButtonDescription> ISimplePopupDescription.Buttons => popupButtons;
     }
 }
 

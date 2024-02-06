@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4067037391968791960
 RectTransform:
   m_ObjectHideFlags: 0
@@ -86,7 +86,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4067037392128440979}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -164,10 +164,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2adc0fb5e0e443d58eaa6651599c20c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputBlocker: {fileID: 4067037392583535084}
   popupParent: {fileID: 4067037391968791960}
   popupWindowPrefab: {fileID: 213406733045481096, guid: bb286997c84d746e89a9749c2f07bedd, type: 3}
-  popupDefaultContentsPrefab: {fileID: 7874674224108000606, guid: 8682cb0004c5046d1a26e5869d4f7465, type: 3}
+  simplePopupContentsPrefab: {fileID: 7874674224108000606, guid: 8682cb0004c5046d1a26e5869d4f7465, type: 3}
 --- !u!1 &4067037392583535085
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +184,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4067037392583535084
 RectTransform:
   m_ObjectHideFlags: 0

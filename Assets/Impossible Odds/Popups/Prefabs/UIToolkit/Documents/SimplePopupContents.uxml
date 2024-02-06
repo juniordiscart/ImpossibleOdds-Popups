@@ -1,5 +1,4 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <Style src="project://database/Assets/Impossible%20Odds/Popups/Prefabs/UIToolkit/Documents/PopupStylesheet.uss?fileID=7433441132597879392&amp;guid=8a4486117b9b441d78abd26e4d675582&amp;type=3#PopupStylesheet" />
     <ui:Label text="Contents" name="Contents" class="popup-contents popup-default-contents" />
     <ui:GroupBox name="ButtonRoot" class="popup-buttonroot popup-default-contents" />
 </ui:UXML>

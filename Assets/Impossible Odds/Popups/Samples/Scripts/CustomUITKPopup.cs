@@ -3,7 +3,7 @@ using ImpossibleOdds;
 using ImpossibleOdds.Popups.UIToolkit;
 using UnityEngine.UIElements;
 
-public class TestCustomUITKPopup : ICustomPopupContents
+public class CustomUITKPopup : ICustomPopupContents
 {
     public event Action onClosePopup;
     public event Action<string> onConfirmName;
@@ -18,7 +18,7 @@ public class TestCustomUITKPopup : ICustomPopupContents
         get;
     }
 
-    public TestCustomUITKPopup(VisualTreeAsset popupContentsAsset)
+    public CustomUITKPopup(VisualTreeAsset popupContentsAsset)
     {
         popupContentsAsset.ThrowIfNull(nameof(popupContentsAsset));
         ContentsRoot = popupContentsAsset.Instantiate();

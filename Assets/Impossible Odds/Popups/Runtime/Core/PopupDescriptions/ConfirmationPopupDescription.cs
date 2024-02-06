@@ -6,7 +6,7 @@ namespace ImpossibleOdds.Popups
     /// Configuration data for a simple confirmation popup.
     /// A confirmation popup only shows textual information that displays a choice the player can make.
     /// </summary>
-    public struct ConfirmationPopupDescription : IDefaultPopupDescription
+    public struct ConfirmationPopupDescription : ISimplePopupDescription
     {
         /// <summary>
         /// The confirmation's header text.
@@ -29,12 +29,12 @@ namespace ImpossibleOdds.Popups
         public PopupButtonDescription cancelButtonDescription;
 
         /// <inheritdoc />
-        string IDefaultPopupDescription.Header => header;
+        string ISimplePopupDescription.Header => header;
 
         /// <inheritdoc />
-        string IDefaultPopupDescription.Contents => contents;
+        string ISimplePopupDescription.Contents => contents;
 
         /// <inheritdoc />
-        IEnumerable<PopupButtonDescription> IDefaultPopupDescription.Buttons => new[] { confirmButtonDescription, cancelButtonDescription };
+        IEnumerable<PopupButtonDescription> ISimplePopupDescription.Buttons => new[] { confirmButtonDescription, cancelButtonDescription };
     }
 }

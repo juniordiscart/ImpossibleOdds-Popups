@@ -49,11 +49,19 @@ namespace ImpossibleOdds.Popups.UIToolkit
             popupContents.onClosePopup += OnClosePopup;
         }
 
+        /// <summary>
+        /// Sets the header text of the popup window.
+        /// </summary>
+        /// <param name="header">The header text to be displayed on the popup window.</param>
         public virtual void SetHeader(string header)
         {
             headerElement.text = header;
         }
 
+        /// <summary>
+        /// Attaches the actual contents of the popup to the root of the popup window's contents root.
+        /// </summary>
+        /// <param name="contents">The contents of the popup window.</param>
         public virtual void SetContents(VisualElement contents)
         {
             contents.ThrowIfNull(nameof(contents));
@@ -71,6 +79,11 @@ namespace ImpossibleOdds.Popups.UIToolkit
             contentElements.Add(contents);
         }
 
+        /// <summary>
+        /// Attaches the actual contents of the popup to the root of the popup window's contents root.
+        /// It will move all of the children of the template container and move them under the popup window's contents root.
+        /// </summary>
+        /// <param name="templateContainer">The contents of the popup window.</param>
         public virtual void SetContents(TemplateContainer templateContainer)
         {
             templateContainer.ThrowIfNull(nameof(templateContainer));
@@ -83,6 +96,11 @@ namespace ImpossibleOdds.Popups.UIToolkit
             }
         }
 
+        /// <summary>
+        /// Attaches the actual contents of the popup to the root of the popup window's contents root.
+        /// This will clone the contents under the popup window's contents root.
+        /// </summary>
+        /// <param name="contents">The contents of the popup window.</param>
         public virtual void SetContents(VisualTreeAsset contents)
         {
             contents.ThrowIfNull(nameof(contents));
@@ -106,15 +124,11 @@ namespace ImpossibleOdds.Popups.UIToolkit
             
             contentElements.AddRange(addedElements);
         }
-
-        public virtual void ClearContents()
+        
+        /// <inheritdoc />
+        public virtual void ClosePopup()
         {
-            foreach (VisualElement contentElement in contentElements)
-            {
-                contentsSiblingElement.parent.Remove(contentElement);
-            }
-            
-            contentElements.Clear();
+            OnClosePopup();
         }
 
         private void OnClosePopup()

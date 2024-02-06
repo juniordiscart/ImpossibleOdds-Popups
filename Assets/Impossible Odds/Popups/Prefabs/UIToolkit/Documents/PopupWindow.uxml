@@ -1,6 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <Style src="project://database/Assets/Impossible%20Odds/Popups/Prefabs/UIToolkit/Documents/PopupStylesheet.uss?fileID=7433441132597879392&amp;guid=8a4486117b9b441d78abd26e4d675582&amp;type=3#PopupStylesheet" />
     <ui:VisualElement name="PopupWindow" class="popup-window">
-        <ui:Label text="Header" display-tooltip-when-elided="true" name="Header" class="popup-header" />
+        <ui:VisualElement name="HeaderGroup" class="popup-header-group">
+            <ui:VisualElement name="HeaderIcon" class="popup-header-icon" style="background-image: url(&apos;project://database/Assets/Impossible%20Odds/ImpossibleOddsLogo.png?fileID=2800000&amp;guid=9d9de55dd023c4618a3ecdfd2a8b8fee&amp;type=3#ImpossibleOddsLogo&apos;); width: 30px; height: 30px;" />
+            <ui:Label text="Header" display-tooltip-when-elided="true" name="HeaderText" class="popup-header-text" />
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

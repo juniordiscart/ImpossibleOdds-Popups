@@ -7,7 +7,7 @@ namespace ImpossibleOdds.Popups.UIToolkit
     /// <summary>
     /// The popup contents that ties together the contents for a default popup.
     /// </summary>
-    public class DefaultPopupContents : IPopupContents
+    public class SimplePopupContents : IPopupContents
     {
         /// <inheritdoc />
         public event Action onClosePopup;
@@ -16,7 +16,7 @@ namespace ImpossibleOdds.Popups.UIToolkit
         private readonly VisualElement buttonRootElement;
         private readonly VisualTreeAsset buttonTreeAsset;
 
-        public DefaultPopupContents(TextElement contentsElement, VisualElement buttonRootElement, VisualTreeAsset buttonTreeAsset)
+        public SimplePopupContents(TextElement contentsElement, VisualElement buttonRootElement, VisualTreeAsset buttonTreeAsset)
         {
             contentsElement.ThrowIfNull(nameof(contentsElement));
             buttonRootElement.ThrowIfNull(nameof(buttonRootElement));
@@ -50,7 +50,7 @@ namespace ImpossibleOdds.Popups.UIToolkit
 
                 if (elementAddedCount != 1)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(elementAddedCount), $"The {nameof(DefaultPopupContents)} expects only a single root element when creating a popup button.");
+                    throw new ArgumentOutOfRangeException(nameof(elementAddedCount), $"The {nameof(SimplePopupContents)} expects only a single root element when creating a popup button.");
                 }
                 
                 Button button = buttonRootElement[firstElementIndex].Q<Button>();
