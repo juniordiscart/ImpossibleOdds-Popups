@@ -35,21 +35,23 @@ namespace ImpossibleOdds.Popups.Canvas
         }
 
         /// <inheritdoc />
-        public IPopupHandle ShowNotification(NotificationPopupDescription notificationData)
+        public IPopupHandle ShowSimplePopup(SimplePopupDescription popupDescription)
         {
-            return ShowDefaultPopup(notificationData);
-        }
+            SimplePopupContents contents = Instantiate(simplePopupContentsPrefab);
+            contents.SetContents(popupDescription.Contents);
+            contents.SetButtons(popupDescription.Buttons);
 
-        /// <inheritdoc />
-        public IPopupHandle ShowConfirmation(ConfirmationPopupDescription confirmationData)
-        {
-            return ShowDefaultPopup(confirmationData);
-        }
+            PopupWindow popupWindow = Instantiate(popupWindowPrefab, popupParent);
+            popupWindow.Initialize(contents, this);
+            popupWindow.SetHeader(popupDescription.Header);
+            popupWindow.SetContents(contents.transform as RectTransform);
+            popupWindow.onClosePopup += ClosePopup;
 
-        /// <inheritdoc />
-        public IPopupHandle ShowComplexPopup(ComplexPopupDescription complexData)
-        {
-            return ShowDefaultPopup(complexData);
+            activePopups.Add(popupWindow);
+
+            canvas.enabled = true;
+
+            return popupWindow;
         }
 
         /// <inheritdoc />
@@ -105,25 +107,6 @@ namespace ImpossibleOdds.Popups.Canvas
         {
             canvas = GetComponent<UnityEngine.Canvas>();
             canvas.enabled = false;
-        }
-
-        private PopupWindow ShowDefaultPopup(ISimplePopupDescription description)
-        {
-            SimplePopupContents contents = Instantiate(simplePopupContentsPrefab);
-            contents.SetContents(description.Contents);
-            contents.SetButtons(description.Buttons);
-            
-            PopupWindow popupWindow = Instantiate(popupWindowPrefab, popupParent);
-            popupWindow.Initialize(contents, this);
-            popupWindow.SetHeader(description.Header);
-            popupWindow.SetContents(contents.transform as RectTransform);
-            popupWindow.onClosePopup += ClosePopup;
-            
-            activePopups.Add(popupWindow);
-
-            canvas.enabled = true;
-
-            return popupWindow;
         }
     }
 }

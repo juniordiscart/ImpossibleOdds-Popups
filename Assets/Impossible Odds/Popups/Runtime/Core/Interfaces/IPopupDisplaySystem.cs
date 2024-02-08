@@ -18,27 +18,14 @@ namespace ImpossibleOdds.Popups
         /// <param name="popupHandle">The popup handle to check with the popup system.</param>
         /// <returns>True if it is being displayed. False otherwise.</returns>
         bool IsShowingPopup(IPopupHandle popupHandle);
-        
-        /// <summary>
-        /// Shows a notification popup.
-        /// </summary>
-        /// <param name="notificationData">The data for the notification popup's contents.</param>
-        /// <returns>A handle to the popup window.</returns>
-        IPopupHandle ShowNotification(NotificationPopupDescription notificationData);
 
         /// <summary>
-        /// Shows a confirmation popup.
+        /// Shows a simple textual popup with zero, one or more options.
+        /// Note: if no options are given to the user to interact with the popup, it's the caller's responsibility to dismiss the popup.
         /// </summary>
-        /// <param name="confirmationData">The data for the confirmation popup's contents.</param>
+        /// <param name="popupDescription">The description of the popup to display.</param>
         /// <returns>A handle to the popup window.</returns>
-        IPopupHandle ShowConfirmation(ConfirmationPopupDescription confirmationData);
-
-        /// <summary>
-        /// Shows a complex popup with multiple options.
-        /// </summary>
-        /// <param name="complexData">The data for the complex popup's contents.</param>
-        /// <returns>A handle to the popup window.</returns>
-        IPopupHandle ShowComplexPopup(ComplexPopupDescription complexData);
+        IPopupHandle ShowSimplePopup(SimplePopupDescription popupDescription);
 
         /// <summary>
         /// Shows a custom popup window in the display system.

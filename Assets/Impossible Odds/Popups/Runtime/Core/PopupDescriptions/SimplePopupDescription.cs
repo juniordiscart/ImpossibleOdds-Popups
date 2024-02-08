@@ -3,32 +3,35 @@ using System.Collections.Generic;
 namespace ImpossibleOdds.Popups
 {
     /// <summary>
-    /// Interface for describing a simple textual popup with limited user options. 
+    /// Description to display a simple textual popup with zero or more buttons.
     /// </summary>
-    public interface ISimplePopupDescription
+    public struct SimplePopupDescription
     {
         /// <summary>
         /// The header text of the popup.
         /// </summary>
-        string Header
+        public string Header
         {
             get;
+            set;
         }
 
         /// <summary>
         /// The text contents of the popup.
         /// </summary>
-        string Contents
+        public string Contents
         {
             get;
+            set;
         }
 
         /// <summary>
         /// The buttons on the popup.
         /// </summary>
-        IEnumerable<PopupButtonDescription> Buttons
+        public IEnumerable<PopupButtonDescription> Buttons
         {
             get;
+            set;
         }
     }
 }

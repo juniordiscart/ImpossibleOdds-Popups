@@ -38,21 +38,25 @@ namespace ImpossibleOdds.Popups.UIToolkit
         }
 
         /// <inheritdoc />
-        public IPopupHandle ShowNotification(NotificationPopupDescription notificationData)
+        public IPopupHandle ShowSimplePopup(SimplePopupDescription popupDescription)
         {
-            return ShowDefaultPopup(notificationData);
-        }
+            TemplateContainer defaultTreeContents = simplePopupContentsConfiguration.contentsTreeAsset.Instantiate();
+            SimplePopupContents simplePopupContents = new SimplePopupContents(
+                defaultTreeContents.Q<TextElement>(simplePopupContentsConfiguration.contentsName),
+                defaultTreeContents.Q(simplePopupContentsConfiguration.buttonsRootName),
+                simplePopupContentsConfiguration.buttonTreeAsset);
+            
+            simplePopupContents.SetContents(popupDescription.Contents);
+            simplePopupContents.SetButtons(popupDescription.Buttons);
+            
+            PopupWindow window = CreatePopupWindow(simplePopupContents);
+            window.SetHeader(popupDescription.Header);
+            window.SetContents(defaultTreeContents);
+            window.onClosePopup += ClosePopup;
+            
+            activePopups.Add(window);
 
-        /// <inheritdoc />
-        public IPopupHandle ShowConfirmation(ConfirmationPopupDescription confirmationData)
-        {
-            return ShowDefaultPopup(confirmationData);
-        }
-
-        /// <inheritdoc />
-        public IPopupHandle ShowComplexPopup(ComplexPopupDescription complexData)
-        {
-            return ShowDefaultPopup(complexData);
+            return window;
         }
 
         /// <inheritdoc />
@@ -104,27 +108,6 @@ namespace ImpossibleOdds.Popups.UIToolkit
             }
 
             document.enabled = IsShowingPopups();
-        }
-
-        private PopupWindow ShowDefaultPopup(ISimplePopupDescription description)
-        {
-            TemplateContainer defaultTreeContents = simplePopupContentsConfiguration.contentsTreeAsset.Instantiate();
-            SimplePopupContents simplePopupContents = new SimplePopupContents(
-                defaultTreeContents.Q<TextElement>(simplePopupContentsConfiguration.contentsName),
-                defaultTreeContents.Q(simplePopupContentsConfiguration.buttonsRootName),
-                simplePopupContentsConfiguration.buttonTreeAsset);
-            
-            simplePopupContents.SetContents(description.Contents);
-            simplePopupContents.SetButtons(description.Buttons);
-            
-            PopupWindow window = CreatePopupWindow(simplePopupContents);
-            window.SetHeader(description.Header);
-            window.SetContents(defaultTreeContents);
-            window.onClosePopup += ClosePopup;
-            
-            activePopups.Add(window);
-
-            return window;
         }
 
         private void Awake()
