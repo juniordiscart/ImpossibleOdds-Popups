@@ -1,7 +1,8 @@
+using ImpossibleOdds.Popups;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TestPopupsCanvas : TestPopups, ImpossibleOdds.Popups.Canvas.ICustomPopupDescription
+public class TestPopupsCanvas : TestPopups
 {
     [SerializeField]
     private Button buttonNotification;
@@ -23,10 +24,11 @@ public class TestPopupsCanvas : TestPopups, ImpossibleOdds.Popups.Canvas.ICustom
         buttonCustom.onClick.AddListener(ShowCustom);
     }
     
-    ImpossibleOdds.Popups.Canvas.ICustomPopupContents ImpossibleOdds.Popups.Canvas.ICustomPopupDescription.GetPopupContents()
+    public override void ShowCustom()
     {
-        CustomCanvasPopup customCanvasPopup = Instantiate(this.customCanvasPopup);
-        customCanvasPopup.onConfirmName += SayHello;
-        return customCanvasPopup;
+        CustomCanvasPopup popup = Instantiate(this.customCanvasPopup);
+        popup.onConfirmName += SayHello;
+        
+        Popup.ShowCustom(popup);
     }
 }

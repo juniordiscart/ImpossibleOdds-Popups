@@ -42,7 +42,7 @@ namespace ImpossibleOdds.Popups
         /// </summary>
         /// <param name="popupData">The popup data to show in this popup display system.</param>
         /// <returns>A handle to the popup window.</returns>
-        public static IPopupHandle ShowCustom(ICustomPopupDescription popupData)
+        public static IPopupHandle ShowCustom(ICustomPopupContents popupData)
         {
             return root.displaySystem.ShowCustomPopup(popupData);
         }

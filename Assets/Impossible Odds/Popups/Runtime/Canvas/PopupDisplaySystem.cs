@@ -55,21 +55,19 @@ namespace ImpossibleOdds.Popups.Canvas
         }
 
         /// <inheritdoc />
-        public IPopupHandle ShowCustomPopup(Popups.ICustomPopupDescription popupDescription)
+        public IPopupHandle ShowCustomPopup(Popups.ICustomPopupContents popupDescription)
         {
             popupDescription.ThrowIfNull(nameof(popupDescription));
 
-            if (popupDescription is not ICustomPopupDescription customPopupData)
+            if (popupDescription is not ICustomPopupContents customPopupData)
             {
-                throw new ArgumentException($"This {nameof(PopupDisplaySystem)} can only display popups that implement the {nameof(ICustomPopupDescription)} interface.");
+                throw new ArgumentException($"This {nameof(PopupDisplaySystem)} can only display popups that implement the {nameof(ICustomPopupContents)} interface.");
             }
 
-            ICustomPopupContents popupContents = customPopupData.GetPopupContents();
-
             PopupWindow popupWindow = Instantiate(popupWindowPrefab, popupParent);
-            popupWindow.Initialize(popupContents, this);
-            popupWindow.SetHeader(popupContents.Header);
-            popupWindow.SetContents(popupContents.ContentsRoot);
+            popupWindow.Initialize(customPopupData, this);
+            popupWindow.SetHeader(customPopupData.Header);
+            popupWindow.SetContents(customPopupData.ContentsRoot);
             popupWindow.onClosePopup += ClosePopup;
             
             activePopups.Add(popupWindow);

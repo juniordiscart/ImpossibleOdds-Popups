@@ -1,8 +1,9 @@
+using ImpossibleOdds.Popups;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(UIDocument))]
-public class TestPopupsUITK : TestPopups, ImpossibleOdds.Popups.UIToolkit.ICustomPopupDescription
+public class TestPopupsUITK : TestPopups
 {
     [SerializeField]
     private VisualTreeAsset customUITKPopup;
@@ -15,11 +16,12 @@ public class TestPopupsUITK : TestPopups, ImpossibleOdds.Popups.UIToolkit.ICusto
         document.rootVisualElement.Q<Button>("ButtonComplex").clicked += ShowDefaultComplex;
         document.rootVisualElement.Q<Button>("ButtonCustom").clicked += ShowCustom;
     }
-
-    ImpossibleOdds.Popups.UIToolkit.ICustomPopupContents ImpossibleOdds.Popups.UIToolkit.ICustomPopupDescription.GetPopupContents()
+    
+    public override void ShowCustom()
     {
-        CustomUITKPopup customUITKPopup = new CustomUITKPopup(this.customUITKPopup);
-        customUITKPopup.onConfirmName += SayHello;
-        return customUITKPopup;
+        CustomUITKPopup popup = new CustomUITKPopup(this.customUITKPopup);
+        popup.onConfirmName += SayHello;
+        
+        Popup.ShowCustom(popup);
     }
 }

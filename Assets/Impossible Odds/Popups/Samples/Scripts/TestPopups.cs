@@ -2,7 +2,7 @@ using ImpossibleOdds;
 using ImpossibleOdds.Popups;
 using UnityEngine;
 
-public abstract class TestPopups : MonoBehaviour, ICustomPopupDescription
+public abstract class TestPopups : MonoBehaviour
 {
     public void ShowDefaultNotification()
     {
@@ -85,10 +85,7 @@ public abstract class TestPopups : MonoBehaviour, ICustomPopupDescription
         });
     }
 
-    public void ShowCustom()
-    {
-        Popup.ShowCustom(this);
-    }
+    public abstract void ShowCustom();
 
     public void SayHello(string name)
     {

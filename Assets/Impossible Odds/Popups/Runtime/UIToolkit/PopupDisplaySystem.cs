@@ -60,21 +60,19 @@ namespace ImpossibleOdds.Popups.UIToolkit
         }
 
         /// <inheritdoc />
-        public IPopupHandle ShowCustomPopup(Popups.ICustomPopupDescription popupDescription)
+        public IPopupHandle ShowCustomPopup(Popups.ICustomPopupContents customPopupData)
         {
-            popupDescription.ThrowIfNull(nameof(popupDescription));
+            customPopupData.ThrowIfNull(nameof(customPopupData));
 
-            if (popupDescription is not ICustomPopupDescription uitkPopupDescription)
+            if (customPopupData is not ICustomPopupContents uitkPopupData)
             {
-                throw new ArgumentException($"This {nameof(PopupDisplaySystem)} can only display custom popups that implement the {nameof(ICustomPopupDescription)} interface.");
+                throw new ArgumentException($"This {nameof(PopupDisplaySystem)} can only display custom popups that implement the {nameof(ICustomPopupContents)} interface.");
             }
             
-            ICustomPopupContents popupContents = uitkPopupDescription.GetPopupContents();
+            PopupWindow window = CreatePopupWindow(uitkPopupData);
+            window.SetHeader(uitkPopupData.Header);
             
-            PopupWindow window = CreatePopupWindow(popupContents);
-            window.SetHeader(popupContents.Header);
-            
-            VisualElement popupContentsRoot = popupContents.ContentsRoot;
+            VisualElement popupContentsRoot = uitkPopupData.ContentsRoot;
             if (popupContentsRoot is TemplateContainer templateContainer)
             {
                 window.SetContents(templateContainer);
