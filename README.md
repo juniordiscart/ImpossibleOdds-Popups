@@ -3,6 +3,18 @@
 The Impossible Odds - Popups package allows you to easily show popup messages in your Unity project. It works both in
 Unity's Canvas (Legacy UI and Text Mesh pro) and UI Toolkit systems.
 
+## Prerequisites & installation
+
+This tool requires the [Impossible Odds - C# Toolkit](https://github.com/juniordiscart/ImpossibleOdds-Toolkit) to be
+present in your project. You can add it to your project through Unity's package manager, by adding it as a git-managed
+package using the following URL:
+
+> https://github.com/juniordiscart/ImpossibleOdds-Toolkit.git?path=/Assets/Impossible%20Odds/Toolkit
+
+Next, add this popup tool using the same git-managed way to your project with the following URL:
+
+> https://github.com/juniordiscart/ImpossibleOdds-Popups.git?path=/Assets/Impossible%20Odds/Popups
+
 ## Setup
 
 To start using the popup system, there's a simple scene setup involved. Depending on your preferred UI framework, drag
@@ -137,10 +149,10 @@ Both systems work with the same basic setup:
 
 ```mermaid
     graph TD;
-        A[Popup System] --> B;
-        B[Popup Window] --> C & D;
-        C[Header];
-        D[Contents];
+    A[Popup System] --> B;
+    B[Popup Window] --> C & D;
+    C[Header];
+    D[Contents];
 ```
 
 The popup display system will spawn and place the popup windows, and a popup window will have a header and contents.
