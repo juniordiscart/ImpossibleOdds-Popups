@@ -1,0 +1,20 @@
+{
+  "name": "com.impossibleodds.popups",
+  "version": "1.0.0",
+  "displayName": "Impossible Odds - Popups",
+  "unity": "2021.3",
+  "documentationUrl": "https://github.com/juniordiscart/ImpossibleOdds-Popups/blob/master/README.md",
+  "licensesUrl": "https://github.com/juniordiscart/ImpossibleOdds-Popups/blob/master/LICENSE.md",
+  "description": "The Impossible Odds - Popups tool offers a simple and flexible way to display popups in different UI systems supported by Unity.",
+  "keywords": [
+    "unity",
+    "unity3d",
+    "game-development",
+    "popup"
+  ],
+  "author": {
+    "name": "Jan Discart",
+    "email": "jan.discart@impossible-odds.net",
+    "url": "https://www.impossible-odds.net"
+  }
+}

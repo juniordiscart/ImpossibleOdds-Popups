@@ -270,8 +270,8 @@ GameObject:
   - component: {fileID: 7673259967370247986}
   - component: {fileID: 7959944736984122970}
   - component: {fileID: 6252283281412854032}
-  - component: {fileID: 213406733045481096}
   - component: {fileID: 1342105512441349713}
+  - component: {fileID: 213406733045481096}
   m_Layer: 5
   m_Name: LegacyPopupWindow
   m_TagString: Untagged
@@ -378,20 +378,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
---- !u!114 &213406733045481096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7530663901293932606}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4af61a6b2b8e4911b79f94359fea6e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  contentsSibling: {fileID: 5236661352565557003}
-  header: {fileID: 5610978199539218188}
 --- !u!114 &1342105512441349713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,3 +393,17 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0.7882353, b: 1, a: 1}
   m_EffectDistance: {x: 3, y: 3}
   m_UseGraphicAlpha: 1
+--- !u!114 &213406733045481096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7530663901293932606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4af61a6b2b8e4911b79f94359fea6e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  contentsSibling: {fileID: 5236661352565557003}
+  header: {fileID: 5610978199539218188}

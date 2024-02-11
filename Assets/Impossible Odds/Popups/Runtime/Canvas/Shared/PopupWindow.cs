@@ -11,7 +11,7 @@ namespace ImpossibleOdds.Popups.Canvas
     {
         public event Action<IPopupHandle> onClosePopup;
         
-        [SerializeField, Tooltip("All content will be placed behind this transform in the popup window.")]
+        [SerializeField, Tooltip("All content will be placed behind this transform in the popup window's hierarchy.")]
         private RectTransform contentsSibling;
 
         private IPopupDisplaySystem displaySystem;

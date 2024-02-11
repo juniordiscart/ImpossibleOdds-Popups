@@ -72,8 +72,8 @@ on which display system (Canvas or UI Toolkit) you're using.
 
 These interfaces require you to define some common properties, and some that are specific to the display system being
 used. For example, the Canvas system requires an instantiated prefab so that is can be placed in the
-hierarchy of the Canvas, while the UI Toolkit one will require you to return a visual element that will be placed in the
-document tree.
+hierarchy of the Canvas and whether to destroy it after it has been closed, while the UI Toolkit one will require you to
+return a visual element that will be placed in the document tree.
 
 An example of a custom popup in the Canvas system could look like this:
 
@@ -127,6 +127,35 @@ public class CustomUITKPopup : ICustomPopupContents
 
 Since you have full control over the contents of these custom popups, it's also up to you to call the necessary
 `onClosePopup` event when done, or call the `ClosePopup` method on the popup handle or on the static `Popup` class.
+
+## Customisation
+
+Chances are you will want to change the look of the popup windows. Each kind of popup display system consists of a
+couple of prefabs or objects. All assets used are found in the _Impossible Odds/Popups/Prefabs_ directories.
+
+Both systems work with the same basic setup:
+
+```mermaid
+    graph TD;
+        A[Popup System] --> B;
+        B[Popup Window] --> C & D;
+        C[Header];
+        D[Contents];
+```
+
+The popup display system will spawn and place the popup windows, and a popup window will have a header and contents.
+The contents will depend on whether it's a simple or a custom popup.
+
+### Canvas
+
+Customising the Canvas system can be done by adjusting the prefabs it works with, or create local copies of the prefabs
+and adjust them.
+
+### UI Toolkit
+
+The UI Toolkit implementation has a document defined for each individual element, as well as a separate stylesheet.
+However, when integrating it in your existing project, make sure to set the correct panel settings to make the visual
+elements receive the correct styling and events.
 
 ## Unity Version
 

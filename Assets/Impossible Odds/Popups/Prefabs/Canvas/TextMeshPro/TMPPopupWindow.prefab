@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 2692984403300788578}
   - component: {fileID: 2401797192870318090}
   - component: {fileID: 1866479015029049152}
-  - component: {fileID: 6200871893979198751}
   - component: {fileID: 7140731503448789710}
+  - component: {fileID: 6200871893979198751}
   m_Layer: 5
   m_Name: TMPPopupWindow
   m_TagString: Untagged
@@ -121,20 +121,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
---- !u!114 &6200871893979198751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2855784269576824430}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 846549e3516f6448a8f16fa28d0323d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  contentsSibling: {fileID: 5700395233701471116}
-  header: {fileID: 3717689328701638144}
 --- !u!114 &7140731503448789710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,6 +136,20 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0.7882353, b: 1, a: 1}
   m_EffectDistance: {x: 3, y: 3}
   m_UseGraphicAlpha: 1
+--- !u!114 &6200871893979198751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2855784269576824430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 846549e3516f6448a8f16fa28d0323d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  contentsSibling: {fileID: 5700395233701471116}
+  header: {fileID: 3717689328701638144}
 --- !u!1 &3625556082116969097
 GameObject:
   m_ObjectHideFlags: 0

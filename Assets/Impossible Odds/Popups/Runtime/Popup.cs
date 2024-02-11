@@ -62,7 +62,6 @@ namespace ImpossibleOdds.Popups
         {
             if (root != null)
             {
-                Log.Warning(gameObject, $"There are multiple popup systems active simultaneously! This one will be destroyed.");
                 Destroy(this);
                 return;
             }
